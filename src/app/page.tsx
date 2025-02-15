@@ -93,15 +93,20 @@ export default function Home() {
         {/* Slider for Accessibility */}
         <label className="block mt-2">
           <span className="font-medium">Accessibility</span>
-          <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.1"
-            value={accessibility}
-            onChange={(e) => setAccessibility(parseFloat(e.target.value))}
-            className="w-full"
-          /></label>
+          <div className="flex items-center space-x-2">
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.1"
+              value={accessibility}
+              onChange={(e) => setAccessibility(parseFloat(e.target.value))}
+              className="w-full"
+            />
+            <span className="w-8 text-right">{accessibility.toFixed(1)}</span>
+          </div>
+        </label>
+
 
         {/* Button to add item */}
         <button onClick={addItem} className="bg-blue-500 text-white p-2 w-full">Add</button>
@@ -111,7 +116,7 @@ export default function Home() {
       <ul className="mt-5 space-y-2">
         {todos.map((todo, index) => (
           <li key={index} className="border p-2 flex justify-between items-center">
-            <span>{todo.activity} - RM{todo.price} ({todo.type}) | {todo.bookingRequired ? "✔" : "✖"} | Acc: {todo.accessibility}</span>
+            <span>{todo.activity} - RM{todo.price} ({todo.type}) | {todo.bookingRequired ? "Booking REQUIRED" : "Booking NOT REQUIRED"} | Accessibility: {todo.accessibility}</span>
             <button onClick={() => removeItem(index)} className="bg-red-500 text-white p-1">Delete</button>
           </li>
         ))}
