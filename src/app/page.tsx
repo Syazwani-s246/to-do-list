@@ -59,29 +59,49 @@ export default function Home() {
 
       {/* Form for adding new to-do */}
       <div className="space-y-2">
-        <input
-          type="text"
-          value={activity}
-          onChange={(e) => setActivity(e.target.value)}
-          placeholder="Activity"
-          required
-          className="border p-2 w-full"
-        />
-        <input
-          type="number"
-          value={price}
-          onChange={(e) => setPrice(e.target.value ? Number(e.target.value) : "")}
-          placeholder="Price"
-          required
-          className="border p-2 w-full"
-        />
-        <select value={type} onChange={(e) => setType(e.target.value)} className="border p-2 w-full">
-          {["education", "recreational", "social", "diy", "charity", "cooking", "relaxation", "music", "busywork"].map(
-            (option) => (
-              <option key={option} value={option}>{option}</option>
-            )
-          )}
-        </select>
+
+        <label className="block">
+          <span className="font-medium">Activity</span>
+          <input
+            type="text"
+            value={activity}
+            onChange={(e) => setActivity(e.target.value)}
+            className="w-full p-2 border rounded"
+          />
+        </label>
+
+
+        {/* Price Input */}
+        <label className="block mt-2">
+          <span className="font-medium">Price</span>
+          <input
+            type="number"
+            value={price}
+            onChange={(e) => setPrice(parseFloat(e.target.value) || 0)}
+            className="w-full p-2 border rounded"
+          />
+        </label>
+
+
+        {/* Type Select */}
+        <label className="block mt-2">
+          <span className="font-medium">Type</span>
+          <select
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+            className="w-full p-2 border rounded"
+          >
+            <option value="education">Education</option>
+            <option value="recreational">Recreational</option>
+            <option value="social">Social</option>
+            <option value="diy">DIY</option>
+            <option value="charity">Charity</option>
+            <option value="cooking">Cooking</option>
+            <option value="relaxation">Relaxation</option>
+            <option value="music">Music</option>
+            <option value="busywork">Busywork</option>
+          </select>
+        </label>
 
         {/* Checkbox for Booking Required */}
         <label className="flex items-center space-x-2">
