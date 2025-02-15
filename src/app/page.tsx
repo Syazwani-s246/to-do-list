@@ -49,7 +49,6 @@ export default function Home() {
 
     if (!validateForm()) return; // Validate before adding
 
-
     const newItem: Todo = { activity, price: Number(price), type, bookingRequired, accessibility };
     setTodos([...todos, newItem]);
 
@@ -61,10 +60,13 @@ export default function Home() {
     setAccessibility(0.5);
   };
 
-  // Function to remove an item by index
+ // Function to remove an item by index with confirmation
   const removeItem = (index: number) => {
-    setTodos(todos.filter((_, i) => i !== index));
+    if (window.confirm("Confirm delete?")) {
+      setTodos(todos.filter((_, i) => i !== index));
+    }
   };
+
 
   return (
     <div className="p-5 max-w-md mx-auto">
