@@ -21,6 +21,8 @@ export default function Home() {
   const [type, setType] = useState("education");
   const [bookingRequired, setBookingRequired] = useState(false);
   const [accessibility, setAccessibility] = useState(0.5);
+  const [errors, setErrors] = useState<{ activity?: string; price?: string }>({});
+
 
   // Load todos from local storage when component mounts
   useEffect(() => {
@@ -33,9 +35,21 @@ export default function Home() {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
+  // Validate form inputs
+  const validateForm = () => {
+    let newErrors: { activity?: string; price?: string } = {};
+    if (!activity.trim()) newErrors.activity = "Activity is required!";
+    if (price === "" || price < 0) newErrors.price = "Price must be a positive number!";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   // Function to add a new to-do item
   const addItem = () => {
-    if (!activity || price === "") return; // Ensure required fields are filled
+
+    if (!validateForm()) return; // Validate before adding
+
+
     const newItem: Todo = { activity, price: Number(price), type, bookingRequired, accessibility };
     setTodos([...todos, newItem]);
 
@@ -68,6 +82,7 @@ export default function Home() {
             onChange={(e) => setActivity(e.target.value)}
             className="w-full p-2 border rounded"
           />
+          {errors.activity && <p className="text-red-500 text-sm">{errors.activity}</p>}
         </label>
 
 
