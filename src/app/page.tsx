@@ -97,6 +97,7 @@ export default function Home() {
             onChange={(e) => setPrice(parseFloat(e.target.value) || 0)}
             className="w-full p-2 border rounded"
           />
+           {errors.price && <p className="text-red-500 text-sm">{errors.price}</p>}
         </label>
 
 
