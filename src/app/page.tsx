@@ -37,7 +37,7 @@ export default function Home() {
 
   // Validate form inputs
   const validateForm = () => {
-    let newErrors: { activity?: string; price?: string } = {};
+    const newErrors: { activity?: string; price?: string } = {};
     if (!activity.trim()) newErrors.activity = "Activity is required!";
     if (price === "" || price < 0) newErrors.price = "Price must be a positive number!";
     setErrors(newErrors);
